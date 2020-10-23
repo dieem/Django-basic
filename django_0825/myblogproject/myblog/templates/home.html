@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+<!-- social login 위해 추가 -->
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block content %}
+<main role="main">
+    
+    
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1>DAIN'S BLOG</h1>
+            <p class="lead text-muted">This is my blog project</p>
+            <p>
+                <a href="{%url 'new' %}" class="btn btn-primary my-2">Add Post</a>
+                <a href="{%url 'create10' %}" class="btn btn-secondary my-2">create 10 Post</a>
+            </p>
+        </div>
+
+        <!-- 로그인 기능 추가 -->
+        <a href="/accounts/signup" class="btn btn-dark">회원가입</a>
+    
+        {% if user.is_authenticated %}
+        <a href="/accounts/logout" class="btn btn-dark">로그아웃</a><br>
+        <br>
+        <h4 style="text-decoration: underline;">{{user.username}}</h4> 님이 로그인 중
+    
+        {% else %}
+        <a href="/accounts/login" class="btn btn-dark">Login</a>
+        <a href="{% provider_login_url 'google' %}" class="btn btn-dark">Login with google</a><br>
+    
+        {% endif %}
+
+    </section>
+    
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+                <!-- 모든 post 출력 -->
+                {% for post in posts.all %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <!-- 이미지가 있으면 -->
+                        {% if post.image != '' %}
+                        <img class="card-img-top" src="{{ post.image.url }}" height="225" alt=" Card image cap">
+
+                        <!-- 이미지가 없으면 -->
+                        {% else %}
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                            xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"
+                            role="img" aria-label="Placeholder: Thumbnail">
+                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                                dy=".3em">No image</text>
+                        </svg>
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h4>{{ post.title }}</h4>
+                            <p class="card-text">{{ post.summary }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <!-- view 버튼에 detail 연결 -->
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        onclick="location.href='{% url 'detail' post.id %}';">View</button>
+                                    <!-- Edit -> Del로 수정 -->
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        onclick="location.href='{% url 'delete' post.id %}';">Del</button>
+                                </div>
+                                <small class="text-muted">{{ post.pub_date }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

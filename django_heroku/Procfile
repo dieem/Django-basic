@@ -1,0 +1,1 @@
+web: gunicorn blog_ckeditor.wsgi --log-file -

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1>New post</h1>
+    <br>
+    <form method="POST" class="post-form" enctype="multipart/form-data">
+        <!-- 보안 관련 태그 -->
+        {% csrf_token %}
+        <!-- 폼 간단히 만들기 -->
+        {{ form.as_p }}
+        <!-- save 버튼 -->
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+{% endblock%}
