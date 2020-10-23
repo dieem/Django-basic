@@ -34,8 +34,6 @@
 ### [django_0926](https://github.com/dieem/Django-basic/tree/main/django_0926)
 * CKEditor
 
-<br>
-
 ### [django_EB](https://github.com/dieem/Django-basic/tree/main/django_EB)
 * Elastic Beanstalk
 
