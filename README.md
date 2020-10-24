@@ -15,7 +15,7 @@
 * QuerySet
 
 ### [django_0818](https://github.com/dieem/Django-basic/tree/main/django_0818)
-* Blo App: CRUD - CRD(Create, Read, Delete)
+* Blog App: CRUD - CRD(Create, Read, Delete)
 * Pagination, Faker
 * (0820) Blog App: CRUD(Create, Read, Update, Delete)
 * (0820) Static / Media
